@@ -3,43 +3,50 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hungry_app/core/constants/app_colors.dart';
 import 'package:hungry_app/shared/custom_text.dart';
+import 'package:hungry_app/shared/custom_text_field.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.primary,
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            children: [
-              Gap(100),
-              SvgPicture.asset('assets/logo/logo.svg'),
-              Gap(10),
-              CustomText(
-                text: 'Welcome Back, Discover The Best Fast Food',
-                color: Colors.white,
-                weight: FontWeight.w500,
-                size: 13,
-              ),
-              Gap(70),
-              TextFormField(
-                decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
-                  ),
-                  hintText: 'Email',
-                  fillColor: Colors.white,
-                  filled: true,
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passController = TextEditingController();
+    return GestureDetector(
+      onTap: () => FocusScope.of(
+        context,
+      ).unfocus(), //اذا كبست على اس شي غير التيكستفيلد بينزل الكيبورد
+      child: Scaffold(
+        backgroundColor: AppColors.primary,
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                Gap(100),
+                SvgPicture.asset('assets/logo/logo.svg'),
+                Gap(10),
+                CustomText(
+                  text: 'Welcome Back, Discover The Best Fast Food',
+                  color: Colors.white,
+                  weight: FontWeight.w500,
+                  size: 13,
                 ),
-              ),
-            ],
+                Gap(60),
+                CustomTextField(
+                  controller: emailController,
+                  hint: 'Email address',
+                  isPassword: false,
+                ),
+                Gap(20),
+                CustomTextField(
+                  controller: passController,
+                  hint: 'Password',
+                  isPassword: true,
+                ),
+                Gap(30),
+              ],
+            ),
           ),
         ),
       ),
