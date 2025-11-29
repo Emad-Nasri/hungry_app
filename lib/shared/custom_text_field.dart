@@ -39,7 +39,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       cursorHeight: 20,
       cursorColor: AppColors.primary,
       validator: (value) {
-        if (value == null) return 'Please fill ${widget.hint}';
+        if (value == null || value.isEmpty) return 'Please fill ${widget.hint}';
         null;
       },
       obscureText: _obscureText,
