@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hungry_app/core/constants/app_colors.dart';
+import 'package:hungry_app/features/auth/widgets/custom_auth_button.dart';
 import 'package:hungry_app/shared/custom_text.dart';
 import 'package:hungry_app/shared/custom_text_field.dart';
 
@@ -12,7 +13,7 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController emailController = TextEditingController();
     TextEditingController passController = TextEditingController();
-    final GlobalKey<FormState> _formKey = GlobalKey();
+    final GlobalKey<FormState> formKey = GlobalKey();
     return GestureDetector(
       onTap: () => FocusScope.of(
         context,
@@ -23,7 +24,7 @@ class LoginView extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Form(
-              key: _formKey,
+              key: formKey,
               child: Column(
                 children: [
                   Gap(100),
@@ -48,27 +49,12 @@ class LoginView extends StatelessWidget {
                     isPassword: true,
                   ),
                   Gap(30),
-                  GestureDetector(
+                  CustomAuthButton(
+                    text: 'Login',
                     onTap: () {
-                      if (_formKey.currentState!.validate())
+                      if (formKey.currentState!.validate())
                         print('success login');
                     },
-                    child: Container(
-                      height: 55,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                      ),
-                      width: double.infinity,
-                      child: Center(
-                        child: CustomText(
-                          text: 'Login',
-                          size: 15,
-                          weight: FontWeight.w700,
-                          color: AppColors.primary,
-                        ),
-                      ),
-                    ),
                   ),
                 ],
               ),
