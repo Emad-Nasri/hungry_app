@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hungry_app/core/constants/app_colors.dart';
 import 'package:hungry_app/features/home/widgets/card_item.dart';
+import 'package:hungry_app/features/home/widgets/user_header.dart';
 import 'package:hungry_app/shared/custom_text.dart';
 
 class HomeView extends StatefulWidget {
@@ -32,30 +32,7 @@ class _HomeViewState extends State<HomeView> {
                   children: [
                     Gap(75),
                     //header
-                    Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SvgPicture.asset(
-                              'assets/logo/logo.svg',
-                              color: AppColors.primary,
-                              height: 35,
-                            ),
-                            Gap(5),
-                            CustomText(
-                              text: 'Hello, Emad Nasri',
-                              size: 16,
-                              weight: FontWeight.w500,
-                              color: Colors.grey.shade500,
-                            ),
-                          ],
-                        ),
-                        Spacer(),
-                        CircleAvatar(radius: 32),
-                      ],
-                    ),
-
+                    UserHeader(),
                     Gap(25),
                     //search
                     Material(
