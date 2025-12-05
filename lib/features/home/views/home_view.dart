@@ -21,120 +21,102 @@ class _HomeViewState extends State<HomeView> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Gap(75),
-                //header
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/logo/logo.svg',
-                          color: AppColors.primary,
-                          height: 35,
-                        ),
-                        Gap(5),
-                        CustomText(
-                          text: 'Hello, Emad Nasri',
-                          size: 16,
-                          weight: FontWeight.w500,
-                          color: Colors.grey.shade500,
-                        ),
-                      ],
-                    ),
-                    Spacer(),
-                    CircleAvatar(radius: 32),
-                  ],
-                ),
-
-                Gap(25),
-                //search
-                Material(
-                  elevation: 2,
-                  shadowColor: Colors.grey,
-                  borderRadius: BorderRadius.circular(15),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      prefixIcon: Icon(CupertinoIcons.search),
-                      hintText: 'Search...',
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.white),
+        body: CustomScrollView(
+          //بيشبه الكولوم بس اقوى منو
+          slivers: [
+            //appbar
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  Gap(75),
+                  //header
+                  Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/logo/logo.svg',
+                            color: AppColors.primary,
+                            height: 35,
+                          ),
+                          Gap(5),
+                          CustomText(
+                            text: 'Hello, Emad Nasri',
+                            size: 16,
+                            weight: FontWeight.w500,
+                            color: Colors.grey.shade500,
+                          ),
+                        ],
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.white),
+                      Spacer(),
+                      CircleAvatar(radius: 32),
+                    ],
+                  ),
+
+                  Gap(25),
+                  //search
+                  Material(
+                    elevation: 2,
+                    shadowColor: Colors.grey,
+                    borderRadius: BorderRadius.circular(15),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        filled: true,
+                        prefixIcon: Icon(CupertinoIcons.search),
+                        hintText: 'Search...',
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Gap(25),
-                //category
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: List.generate(category.length, (index) {
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selectedIndex = index;
-                          });
-                        },
-                        child: Container(
-                          margin: EdgeInsets.only(right: 8),
-                          decoration: BoxDecoration(
-                            color: selectedIndex == index
-                                ? AppColors.primary
-                                : Color(0xffF3F4F6),
-                            borderRadius: BorderRadius.circular(20),
+                  Gap(25),
+                  //category
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: List.generate(category.length, (index) {
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedIndex = index;
+                            });
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(right: 8),
+                            decoration: BoxDecoration(
+                              color: selectedIndex == index
+                                  ? AppColors.primary
+                                  : Color(0xffF3F4F6),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 27,
+                              vertical: 15,
+                            ),
+                            child: CustomText(
+                              text: category[index],
+                              weight: FontWeight.w600,
+                              color: selectedIndex == index
+                                  ? Colors.white
+                                  : Colors.grey.shade700,
+                            ),
                           ),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 27,
-                            vertical: 15,
-                          ),
-                          child: CustomText(
-                            text: category[index],
-                            weight: FontWeight.w600,
-                            color: selectedIndex == index
-                                ? Colors.white
-                                : Colors.grey.shade700,
-                          ),
-                        ),
-                      );
-                    }),
+                        );
+                      }),
+                    ),
                   ),
-                ),
-
-                //Card item
-                GridView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  padding: EdgeInsets.zero,
-                  itemCount: 6,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.71,
-                    mainAxisSpacing: 2,
-                  ),
-                  itemBuilder: (context, index) {
-                    return CardItem(
-                      image: 'assets/splash/splash.png',
-                      text: 'Cheeseburger',
-                      desc: 'Wendy\'s Burger',
-                      rate: '4.9',
-                    );
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
