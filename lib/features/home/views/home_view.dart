@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hungry_app/core/constants/app_colors.dart';
 import 'package:hungry_app/features/home/widgets/card_item.dart';
+import 'package:hungry_app/features/home/widgets/search_field.dart';
 import 'package:hungry_app/features/home/widgets/user_header.dart';
 import 'package:hungry_app/shared/custom_text.dart';
 
@@ -35,27 +36,7 @@ class _HomeViewState extends State<HomeView> {
                     UserHeader(),
                     Gap(25),
                     //search
-                    Material(
-                      elevation: 2,
-                      shadowColor: Colors.grey,
-                      borderRadius: BorderRadius.circular(15),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          fillColor: Colors.white,
-                          filled: true,
-                          prefixIcon: Icon(CupertinoIcons.search),
-                          hintText: 'Search...',
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
+                    SearchField(),
                     Gap(25),
                     //category
                     SingleChildScrollView(
