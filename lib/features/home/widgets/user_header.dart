@@ -13,8 +13,10 @@ class UserHeader extends StatelessWidget {
     return Row(
       children: [
         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Gap(30),
             SvgPicture.asset(
               'assets/logo/logo.svg',
               color: AppColors.primary,
@@ -30,7 +32,11 @@ class UserHeader extends StatelessWidget {
           ],
         ),
         Spacer(),
-        CircleAvatar(radius: 32),
+        CircleAvatar(
+          radius: 32,
+          backgroundColor: AppColors.primary,
+          child: Icon(CupertinoIcons.person, color: Colors.white),
+        ),
       ],
     );
   }

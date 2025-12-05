@@ -24,26 +24,41 @@ class _HomeViewState extends State<HomeView> {
         body: CustomScrollView(
           //بيشبه الكولوم بس اقوى منو
           slivers: [
-            //appbar
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+            //header and search
+            SliverAppBar(
+              elevation: 0,
+              pinned: true,
+              floating: false,
+              scrolledUnderElevation: 0,
+              backgroundColor: Colors.white,
+              toolbarHeight: 200,
+              automaticallyImplyLeading: false,
+              flexibleSpace: Padding(
+                padding: const EdgeInsets.only(top: 38, right: 20, left: 20),
                 child: Column(
                   children: [
-                    Gap(75),
-                    //header
                     UserHeader(),
-                    Gap(25),
+                    Gap(20),
                     //search
                     SearchField(),
-                    Gap(25),
+                  ],
+                ),
+              ),
+            ),
+
+            //category
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 25,
+                  vertical: 10,
+                ),
+                child:
                     //category
                     FoodCategory(
                       selectedIndex: selectedIndex,
                       category: category,
                     ),
-                  ],
-                ),
               ),
             ),
             //Grid View
