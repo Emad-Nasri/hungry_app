@@ -31,6 +31,7 @@ class _RootState extends State<Root> {
         //بتسمح تحط الاربع سكرينات فيها
         controller: controller,
         children: screens,
+        physics: NeverScrollableScrollPhysics(),
       ),
       bottomNavigationBar: Container(
         padding: EdgeInsets.all(10),
