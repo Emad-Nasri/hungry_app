@@ -8,13 +8,20 @@ class FoodCategory extends StatefulWidget {
     required this.selectedIndex,
     required this.category,
   });
-  late final int selectedIndex;
+  final int selectedIndex;
   final List category;
   @override
   State<FoodCategory> createState() => _FoodCategoryState();
 }
 
 class _FoodCategoryState extends State<FoodCategory> {
+  late int selectedIndex;
+  @override
+  void initState() {
+    selectedIndex = widget.selectedIndex;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -24,13 +31,13 @@ class _FoodCategoryState extends State<FoodCategory> {
           return GestureDetector(
             onTap: () {
               setState(() {
-                widget.selectedIndex = index;
+                selectedIndex = index;
               });
             },
             child: Container(
               margin: EdgeInsets.only(right: 8),
               decoration: BoxDecoration(
-                color: widget.selectedIndex == index
+                color: selectedIndex == index
                     ? AppColors.primary
                     : Color(0xffF3F4F6),
                 borderRadius: BorderRadius.circular(20),
@@ -39,7 +46,7 @@ class _FoodCategoryState extends State<FoodCategory> {
               child: CustomText(
                 text: widget.category[index],
                 weight: FontWeight.w600,
-                color: widget.selectedIndex == index
+                color: selectedIndex == index
                     ? Colors.white
                     : Colors.grey.shade700,
               ),
