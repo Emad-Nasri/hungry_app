@@ -5,6 +5,7 @@ import 'package:hungry_app/features/home/widgets/card_item.dart';
 import 'package:hungry_app/features/home/widgets/food_category.dart';
 import 'package:hungry_app/features/home/widgets/search_field.dart';
 import 'package:hungry_app/features/home/widgets/user_header.dart';
+import 'package:hungry_app/features/product/views/product_details_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -53,12 +54,10 @@ class _HomeViewState extends State<HomeView> {
                   horizontal: 25,
                   vertical: 10,
                 ),
-                child:
-                    //category
-                    FoodCategory(
-                      selectedIndex: selectedIndex,
-                      category: category,
-                    ),
+                child: FoodCategory(
+                  selectedIndex: selectedIndex,
+                  category: category,
+                ),
               ),
             ),
             //Grid View
@@ -71,11 +70,23 @@ class _HomeViewState extends State<HomeView> {
                 ),
                 delegate: SliverChildBuilderDelegate(
                   childCount: 6,
-                  (context, index) => CardItem(
-                    image: 'assets/splash/splash.png',
-                    text: 'Cheese burger',
-                    desc: 'Wedy\'s best buger',
-                    rate: '4.9',
+                  (context, index) => GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (c) {
+                            return ProductDetailsView();
+                          },
+                        ),
+                      );
+                    },
+                    child: CardItem(
+                      image: 'assets/splash/splash.png',
+                      text: 'Cheese burger',
+                      desc: 'Wendy\'s Burger',
+                      rate: '4.9',
+                    ),
                   ),
                 ),
               ),
