@@ -5,6 +5,14 @@ class ProductDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        leading: GestureDetector(
+          onTap: () => Navigator.pop(context),
+          child: Icon(Icons.arrow_back),
+        ),
+      ),
+    );
   }
 }
