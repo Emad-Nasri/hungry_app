@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hungry_app/shared/custom_text.dart';
+import 'package:hungry_app/features/product/widgets/spicy_slider.dart';
 
 class ProductDetailsView extends StatelessWidget {
   const ProductDetailsView({super.key});
@@ -14,20 +14,7 @@ class ProductDetailsView extends StatelessWidget {
           child: Icon(Icons.arrow_back),
         ),
       ),
-      body: Column(
-        children: [
-          Row(
-            children: [
-              Image.asset('assets/detail/Sandwich_details.png', height: 250),
-              Spacer(),
-              CustomText(
-                text:
-                    'Customize Your Burger\n to Your Tastes.\n Ultimate Experience',
-              ),
-            ],
-          ),
-        ],
-      ),
+      body: Column(children: [SpicySlider()]),
     );
   }
 }
