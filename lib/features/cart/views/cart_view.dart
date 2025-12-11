@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:hungry_app/core/constants/app_colors.dart';
+import 'package:hungry_app/features/cart/widgets/cart_item.dart';
+import 'package:hungry_app/shared/custom_button.dart';
 import 'package:hungry_app/shared/custom_text.dart';
 
 class CartView extends StatelessWidget {
@@ -12,81 +12,35 @@ class CartView extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: Column(
+        child: ListView.builder(
+          padding: EdgeInsets.only(bottom: 120, top: 100),
+          itemCount: 6,
+          itemBuilder: (context, index) {
+            return CartItem(
+              image: 'assets/detail/tomatow.png',
+              text: 'Tomatow',
+              desc: 'its color is red',
+              number: 1,
+            );
+          },
+        ),
+      ),
+      bottomSheet: Container(
+        color: Colors.white,
+        padding: EdgeInsets.all(10),
+        height: 100,
+        width: double.infinity,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Gap(100),
-            Card(
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 25,
-                  vertical: 10,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.asset('assets/detail/tomatow.png', width: 100),
-                        CustomText(text: 'Tomatow', weight: FontWeight.bold),
-                        CustomText(text: 'its color is red'),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {},
-                              child: CircleAvatar(
-                                backgroundColor: AppColors.primary,
-                                child: Icon(
-                                  CupertinoIcons.add,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            Gap(20),
-                            CustomText(
-                              text: '1',
-                              weight: FontWeight.w400,
-                              size: 20,
-                            ),
-                            Gap(20),
-                            GestureDetector(
-                              onTap: () {},
-                              child: CircleAvatar(
-                                backgroundColor: AppColors.primary,
-                                child: Icon(
-                                  CupertinoIcons.minus,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Gap(20),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: AppColors.primary,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          width: 130,
-                          height: 45,
-                          child: Center(
-                            child: CustomText(
-                              text: 'Remove',
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomText(text: 'Total', size: 16),
+                CustomText(text: '\$18.9', size: 24),
+              ],
             ),
+            CustomButton(text: 'Checkout', onTap: () {}),
           ],
         ),
       ),
