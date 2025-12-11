@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hungry_app/core/constants/app_colors.dart';
 import 'package:hungry_app/shared/custom_text.dart';
 
 class CartView extends StatelessWidget {
@@ -30,8 +32,39 @@ class CartView extends StatelessWidget {
                         CustomText(text: 'its color is red'),
                       ],
                     ),
-                    Column(children: [
-                        
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {},
+                              child: CircleAvatar(
+                                backgroundColor: AppColors.primary,
+                                child: Icon(
+                                  CupertinoIcons.add,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            Gap(20),
+                            CustomText(
+                              text: '1',
+                              weight: FontWeight.w700,
+                              size: 20,
+                            ),
+                            Gap(20),
+                            GestureDetector(
+                              onTap: () {},
+                              child: CircleAvatar(
+                                backgroundColor: AppColors.primary,
+                                child: Icon(
+                                  CupertinoIcons.minus,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ],
