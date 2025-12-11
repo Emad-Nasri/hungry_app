@@ -23,6 +23,7 @@ class CartView extends StatelessWidget {
                   vertical: 10,
                 ),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +50,7 @@ class CartView extends StatelessWidget {
                             Gap(20),
                             CustomText(
                               text: '1',
-                              weight: FontWeight.w700,
+                              weight: FontWeight.w400,
                               size: 20,
                             ),
                             Gap(20),
@@ -64,6 +65,21 @@ class CartView extends StatelessWidget {
                               ),
                             ),
                           ],
+                        ),
+                        Gap(20),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          width: 130,
+                          height: 45,
+                          child: Center(
+                            child: CustomText(
+                              text: 'Remove',
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ],
                     ),
