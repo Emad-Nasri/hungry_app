@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hungry_app/shared/custom_text.dart';
 
 class CartView extends StatelessWidget {
   const CartView({super.key});
@@ -13,11 +14,15 @@ class CartView extends StatelessWidget {
           children: [
             Gap(100),
             Card(
+              color: Colors.white,
               child: Row(
                 children: [
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Image.asset('assets/detail/tomatow.png', width: 100),
+                      CustomText(text: 'Tomatow'),
+                      CustomText(text: 'its color is red'),
                     ],
                   ),
                   Column(children: [
