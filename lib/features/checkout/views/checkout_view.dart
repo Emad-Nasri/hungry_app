@@ -42,6 +42,12 @@ class CheckoutView extends StatelessWidget {
               true,
               true,
             ),
+            Gap(80),
+            CustomText(
+              text: 'Payment methods',
+              size: 20,
+              weight: FontWeight.w500,
+            ),
           ],
         ),
       ),
