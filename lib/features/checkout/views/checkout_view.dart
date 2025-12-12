@@ -42,11 +42,7 @@ class CheckoutView extends StatelessWidget {
             ),
             Gap(20),
             ListTile(
-              leading: Image.asset(
-                'assets/icon/cash.png',
-                width: 100,
-                height: 100,
-              ),
+              leading: Image.asset('assets/icon/cash.png', width: 50),
               title: Text('Cash on Delivery'),
               trailing: Radio<String>(
                 activeColor: AppColors.primary,
