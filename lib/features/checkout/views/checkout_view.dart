@@ -41,6 +41,9 @@ class CheckoutView extends StatelessWidget {
             ),
             Gap(20),
             ListTile(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadiusGeometry.circular(8),
+              ),
               tileColor: Color(0xff3C2F2F),
               leading: Image.asset('assets/icon/cash.png', width: 50),
               title: CustomText(text: 'Cash on Delivery', color: Colors.white),
