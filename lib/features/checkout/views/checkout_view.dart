@@ -26,79 +26,92 @@ class _CheckoutViewState extends State<CheckoutView> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomText(
-              text: 'Order summary',
-              size: 20,
-              weight: FontWeight.w500,
-            ),
-            Gap(10),
-            OrderDetailsWidget(
-              order: '18.5',
-              taxes: '10.6',
-              fees: '2.4',
-              total: '100.4',
-            ),
-            Gap(80),
-            CustomText(
-              text: 'Payment methods',
-              size: 20,
-              weight: FontWeight.w500,
-            ),
-            Gap(20),
-            //cash
-            ListTile(
-              onTap: () => setState(() => selectedMethod = 'Cash'),
-              contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadiusGeometry.circular(8),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomText(
+                text: 'Order summary',
+                size: 20,
+                weight: FontWeight.w500,
               ),
-              tileColor: Color(0xff3C2F2F),
-              leading: Image.asset('assets/icon/cash.png', width: 50),
-              title: CustomText(text: 'Cash on Delivery', color: Colors.white),
-              trailing: Radio<String>(
-                activeColor: Colors.white,
-                value: 'Cash',
-                groupValue: selectedMethod,
-                onChanged: (v) => setState(() => selectedMethod = v!),
+              Gap(10),
+              OrderDetailsWidget(
+                order: '18.5',
+                taxes: '10.6',
+                fees: '2.4',
+                total: '100.4',
               ),
-            ),
-            Gap(10),
-            //debit
-            ListTile(
-              onTap: () => setState(() => selectedMethod = 'Visa'),
-              contentPadding: EdgeInsets.symmetric(vertical: 2, horizontal: 16),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadiusGeometry.circular(8),
+              Gap(80),
+              CustomText(
+                text: 'Payment methods',
+                size: 20,
+                weight: FontWeight.w500,
               ),
-              tileColor: Colors.blue.shade900,
-              leading: Image.asset('assets/icon/visa.png', width: 50),
-              title: CustomText(text: 'Debit Card', color: Colors.white),
-              subtitle: CustomText(
-                text: '**** ***** 2342',
-                color: Colors.white,
-              ),
-              trailing: Radio<String>(
-                activeColor: Colors.white,
-                value: 'Visa',
-                groupValue: selectedMethod,
-                onChanged: (v) => setState(() => selectedMethod = v!),
-              ),
-            ),
-            Gap(5),
-            Row(
-              children: [
-                Checkbox(
-                  value: true,
-                  activeColor: Color(0xffEF2A39),
-                  onChanged: (v) {},
+              Gap(20),
+              //cash
+              ListTile(
+                onTap: () => setState(() => selectedMethod = 'Cash'),
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: 8,
+                  horizontal: 16,
                 ),
-                CustomText(text: 'Save card details for future payments'),
-              ],
-            ),
-          ],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadiusGeometry.circular(8),
+                ),
+                tileColor: Color(0xff3C2F2F),
+                leading: Image.asset('assets/icon/cash.png', width: 50),
+                title: CustomText(
+                  text: 'Cash on Delivery',
+                  color: Colors.white,
+                ),
+                trailing: Radio<String>(
+                  activeColor: Colors.white,
+                  value: 'Cash',
+                  groupValue: selectedMethod,
+                  onChanged: (v) => setState(() => selectedMethod = v!),
+                ),
+              ),
+              Gap(10),
+              //debit
+              ListTile(
+                onTap: () => setState(() => selectedMethod = 'Visa'),
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: 2,
+                  horizontal: 16,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadiusGeometry.circular(8),
+                ),
+                tileColor: Colors.blue.shade900,
+                leading: Image.asset('assets/icon/visa.png', width: 50),
+                title: CustomText(text: 'Debit Card', color: Colors.white),
+                subtitle: CustomText(
+                  text: '**** ***** 2342',
+                  color: Colors.white,
+                ),
+                trailing: Radio<String>(
+                  activeColor: Colors.white,
+                  value: 'Visa',
+                  groupValue: selectedMethod,
+                  onChanged: (v) => setState(() => selectedMethod = v!),
+                ),
+              ),
+              Gap(5),
+              Row(
+                children: [
+                  Checkbox(
+                    value: true,
+                    activeColor: Color(0xffEF2A39),
+                    onChanged: (v) {},
+                  ),
+                  CustomText(text: 'Save card details for future payments'),
+                ],
+              ),
+              Gap(200),
+            ],
+          ),
         ),
       ),
       bottomSheet: Container(
