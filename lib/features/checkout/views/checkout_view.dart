@@ -3,8 +3,15 @@ import 'package:gap/gap.dart';
 import 'package:hungry_app/features/checkout/widgets/order_details_widget.dart';
 import 'package:hungry_app/shared/custom_text.dart';
 
-class CheckoutView extends StatelessWidget {
+class CheckoutView extends StatefulWidget {
   const CheckoutView({super.key});
+
+  @override
+  State<CheckoutView> createState() => _CheckoutViewState();
+}
+
+class _CheckoutViewState extends State<CheckoutView> {
+  String selectedMethod = 'Cash';
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +47,7 @@ class CheckoutView extends StatelessWidget {
               weight: FontWeight.w500,
             ),
             Gap(20),
+            //cash
             ListTile(
               contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               shape: RoundedRectangleBorder(
@@ -51,11 +59,16 @@ class CheckoutView extends StatelessWidget {
               trailing: Radio<String>(
                 activeColor: Colors.white,
                 value: 'Cash',
-                groupValue: 'Cash',
-                onChanged: (v) {},
+                groupValue: selectedMethod,
+                onChanged: (v) {
+                  setState(() {
+                    selectedMethod = v!;
+                  });
+                },
               ),
             ),
             Gap(10),
+            //debit
             ListTile(
               contentPadding: EdgeInsets.symmetric(vertical: 2, horizontal: 16),
               shape: RoundedRectangleBorder(
@@ -70,9 +83,13 @@ class CheckoutView extends StatelessWidget {
               ),
               trailing: Radio<String>(
                 activeColor: Colors.white,
-                value: 'Cash',
-                groupValue: 'Cash',
-                onChanged: (v) {},
+                value: 'Visa',
+                groupValue: selectedMethod,
+                onChanged: (v) {
+                  setState(() {
+                    selectedMethod = v!;
+                  });
+                },
               ),
             ),
           ],
