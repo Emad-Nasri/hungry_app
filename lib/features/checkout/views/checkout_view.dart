@@ -41,6 +41,7 @@ class CheckoutView extends StatelessWidget {
             ),
             Gap(20),
             ListTile(
+              contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadiusGeometry.circular(8),
               ),
