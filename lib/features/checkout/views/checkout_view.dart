@@ -26,12 +26,13 @@ class CheckoutView extends StatelessWidget {
               weight: FontWeight.w500,
             ),
             Gap(10),
-            checkoutWidget('Order', '18.5'),
+            checkoutWidget('Order', '18.5', false),
             Gap(10),
-            checkoutWidget('Taxes', '3.5'),
+            checkoutWidget('Taxes', '3.5', false),
             Gap(10),
-            checkoutWidget('Delivery fees', '2.4'),
+            checkoutWidget('Delivery fees', '2.4', false),
             Gap(10),
+            Divider(),
           ],
         ),
       ),
@@ -39,20 +40,20 @@ class CheckoutView extends StatelessWidget {
   }
 }
 
-Widget checkoutWidget(title, price) {
+Widget checkoutWidget(title, price, isBold) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       CustomText(
         text: title,
         size: 15,
-        weight: FontWeight.w400,
+        weight: isBold ? FontWeight.bold : FontWeight.w400,
         color: Colors.grey.shade600,
       ),
       CustomText(
         text: '$price\$',
         size: 15,
-        weight: FontWeight.w400,
+        weight: isBold ? FontWeight.bold : FontWeight.w400,
         color: Colors.grey.shade600,
       ),
     ],
