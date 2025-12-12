@@ -26,15 +26,22 @@ class CheckoutView extends StatelessWidget {
               weight: FontWeight.w500,
             ),
             Gap(10),
-            checkoutWidget('Order', '18.5', false),
+            checkoutWidget('Order', '18.5', false, false),
             Gap(10),
-            checkoutWidget('Taxes', '3.5', false),
+            checkoutWidget('Taxes', '3.5', false, false),
             Gap(10),
-            checkoutWidget('Delivery fees', '2.4', false),
+            checkoutWidget('Delivery fees', '2.4', false, false),
             Gap(10),
             Divider(),
             Gap(10),
-            checkoutWidget('Total', '100.30', true),
+            checkoutWidget('Total', '100.30', true, false),
+            Gap(10),
+            checkoutWidget(
+              'Estimated delivery time :',
+              '15 - 30 mins',
+              true,
+              true,
+            ),
           ],
         ),
       ),
@@ -42,19 +49,19 @@ class CheckoutView extends StatelessWidget {
   }
 }
 
-Widget checkoutWidget(title, price, isBold) {
+Widget checkoutWidget(title, price, isBold, isSmall) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       CustomText(
         text: title,
-        size: 15,
+        size: isSmall ? 12 : 15,
         weight: isBold ? FontWeight.bold : FontWeight.w400,
         color: isBold ? Colors.black : Colors.grey.shade600,
       ),
       CustomText(
         text: '$price\$',
-        size: 15,
+        size: isSmall ? 12 : 15,
         weight: isBold ? FontWeight.bold : FontWeight.w400,
         color: isBold ? Colors.black : Colors.grey.shade600,
       ),
