@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hungry_app/features/checkout/widgets/order_details_widget.dart';
 import 'package:hungry_app/shared/custom_text.dart';
 
 class CheckoutView extends StatelessWidget {
@@ -26,21 +27,11 @@ class CheckoutView extends StatelessWidget {
               weight: FontWeight.w500,
             ),
             Gap(10),
-            checkoutWidget('Order', '18.5', false, false),
-            Gap(10),
-            checkoutWidget('Taxes', '3.5', false, false),
-            Gap(10),
-            checkoutWidget('Delivery fees', '2.4', false, false),
-            Gap(10),
-            Divider(),
-            Gap(10),
-            checkoutWidget('Total', '100.30', true, false),
-            Gap(10),
-            checkoutWidget(
-              'Estimated delivery time :',
-              '15 - 30 mins',
-              true,
-              true,
+            OrderDetailsWidget(
+              order: '18.5',
+              taxes: '10.6',
+              fees: '2.4',
+              total: '100.4',
             ),
             Gap(80),
             CustomText(
@@ -53,24 +44,4 @@ class CheckoutView extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget checkoutWidget(title, price, isBold, isSmall) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      CustomText(
-        text: title,
-        size: isSmall ? 12 : 15,
-        weight: isBold ? FontWeight.bold : FontWeight.w400,
-        color: isBold ? Colors.black : Colors.grey.shade600,
-      ),
-      CustomText(
-        text: '$price\$',
-        size: isSmall ? 12 : 15,
-        weight: isBold ? FontWeight.bold : FontWeight.w400,
-        color: isBold ? Colors.black : Colors.grey.shade600,
-      ),
-    ],
-  );
 }
