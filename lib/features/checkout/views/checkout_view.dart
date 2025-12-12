@@ -86,6 +86,17 @@ class _CheckoutViewState extends State<CheckoutView> {
                 onChanged: (v) => setState(() => selectedMethod = v!),
               ),
             ),
+            Gap(5),
+            Row(
+              children: [
+                Checkbox(
+                  value: true,
+                  activeColor: Color(0xffEF2A39),
+                  onChanged: (v) {},
+                ),
+                CustomText(text: 'Save card details for future payments'),
+              ],
+            ),
           ],
         ),
       ),
