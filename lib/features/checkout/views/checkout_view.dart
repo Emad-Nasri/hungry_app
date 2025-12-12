@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hungry_app/core/constants/app_colors.dart';
 import 'package:hungry_app/features/checkout/widgets/order_details_widget.dart';
 import 'package:hungry_app/shared/custom_text.dart';
 
@@ -42,10 +41,11 @@ class CheckoutView extends StatelessWidget {
             ),
             Gap(20),
             ListTile(
+              tileColor: Color(0xff3C2F2F),
               leading: Image.asset('assets/icon/cash.png', width: 50),
-              title: Text('Cash on Delivery'),
+              title: CustomText(text: 'Cash on Delivery', color: Colors.white),
               trailing: Radio<String>(
-                activeColor: AppColors.primary,
+                activeColor: Colors.white,
                 value: 'Cash',
                 groupValue: 'Cash',
                 onChanged: (v) {},
