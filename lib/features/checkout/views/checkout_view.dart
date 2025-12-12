@@ -41,13 +41,33 @@ class CheckoutView extends StatelessWidget {
             ),
             Gap(20),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+              contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadiusGeometry.circular(8),
               ),
               tileColor: Color(0xff3C2F2F),
               leading: Image.asset('assets/icon/cash.png', width: 50),
               title: CustomText(text: 'Cash on Delivery', color: Colors.white),
+              trailing: Radio<String>(
+                activeColor: Colors.white,
+                value: 'Cash',
+                groupValue: 'Cash',
+                onChanged: (v) {},
+              ),
+            ),
+            Gap(10),
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(vertical: 2, horizontal: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadiusGeometry.circular(8),
+              ),
+              tileColor: Colors.blue.shade900,
+              leading: Image.asset('assets/icon/visa.png', width: 50),
+              title: CustomText(text: 'Debit Card', color: Colors.white),
+              subtitle: CustomText(
+                text: '**** ***** 2342',
+                color: Colors.white,
+              ),
               trailing: Radio<String>(
                 activeColor: Colors.white,
                 value: 'Cash',
