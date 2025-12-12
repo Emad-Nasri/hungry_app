@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hungry_app/core/constants/app_colors.dart';
 import 'package:hungry_app/features/checkout/widgets/order_details_widget.dart';
 import 'package:hungry_app/shared/custom_text.dart';
 
@@ -38,6 +39,21 @@ class CheckoutView extends StatelessWidget {
               text: 'Payment methods',
               size: 20,
               weight: FontWeight.w500,
+            ),
+            Gap(20),
+            ListTile(
+              leading: Image.asset(
+                'assets/icon/cash.png',
+                width: 100,
+                height: 100,
+              ),
+              title: Text('Cash on Delivery'),
+              trailing: Radio<String>(
+                activeColor: AppColors.primary,
+                value: 'Cash',
+                groupValue: 'Cash',
+                onChanged: (v) {},
+              ),
             ),
           ],
         ),
