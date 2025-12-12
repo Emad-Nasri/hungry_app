@@ -49,6 +49,7 @@ class _CheckoutViewState extends State<CheckoutView> {
             Gap(20),
             //cash
             ListTile(
+              onTap: () => setState(() => selectedMethod = 'Cash'),
               contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadiusGeometry.circular(8),
@@ -60,16 +61,13 @@ class _CheckoutViewState extends State<CheckoutView> {
                 activeColor: Colors.white,
                 value: 'Cash',
                 groupValue: selectedMethod,
-                onChanged: (v) {
-                  setState(() {
-                    selectedMethod = v!;
-                  });
-                },
+                onChanged: (v) => setState(() => selectedMethod = v!),
               ),
             ),
             Gap(10),
             //debit
             ListTile(
+              onTap: () => setState(() => selectedMethod = 'Visa'),
               contentPadding: EdgeInsets.symmetric(vertical: 2, horizontal: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadiusGeometry.circular(8),
@@ -85,11 +83,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                 activeColor: Colors.white,
                 value: 'Visa',
                 groupValue: selectedMethod,
-                onChanged: (v) {
-                  setState(() {
-                    selectedMethod = v!;
-                  });
-                },
+                onChanged: (v) => setState(() => selectedMethod = v!),
               ),
             ),
           ],
