@@ -105,9 +105,13 @@ class LoginView extends StatelessWidget {
                               ),
                             );
                           },
-                          child: Text('Countinue as a guest ?'),
+                          child: CustomText(
+                            text: 'Countinue as a guest ?',
+                            color: Colors.orange,
+                            weight: FontWeight.bold,
+                            size: 13,
+                          ),
                         ),
-                        TextButton(onPressed: () {}, child: Text('')),
                       ],
                     ),
                   ),
