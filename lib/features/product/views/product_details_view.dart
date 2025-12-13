@@ -71,22 +71,41 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                 }),
               ),
             ),
-            Gap(50),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(text: 'Total', size: 16),
-                    CustomText(text: '\$18.9', size: 24),
-                  ],
-                ),
-                CustomButton(text: 'Add To Cart', onTap: () {}),
-              ],
-            ),
-            Gap(100),
+            Gap(150),
           ],
+        ),
+      ),
+      bottomSheet: Container(
+        height: 120,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.shade800,
+              blurRadius: 15,
+              offset: Offset(0, 0),
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText(text: 'Total', size: 16),
+                  CustomText(text: '\$18.9', size: 24),
+                ],
+              ),
+              CustomButton(text: 'Add To Cart', onTap: () {}),
+            ],
+          ),
         ),
       ),
     );
