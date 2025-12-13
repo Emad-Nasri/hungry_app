@@ -20,13 +20,13 @@ class SignupView extends StatelessWidget {
         key: formKey,
         child: Column(
           children: [
-            Gap(100),
+            Gap(200),
             SvgPicture.asset('assets/logo/logo.svg', color: AppColors.primary),
             CustomText(
               text: 'Welcome to our Food App',
               color: AppColors.primary,
             ),
-            Gap(40),
+            Gap(60),
             Expanded(
               child: Container(
                 padding: EdgeInsets.all(20),

@@ -55,11 +55,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
           borderSide: BorderSide(color: Colors.white),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
+          borderSide: BorderSide(color: AppColors.primary),
         ),
         hintText: widget.hint,
-        hintStyle: TextStyle(color: Colors.white),
-        fillColor: Colors.transparent,
+        hintStyle: TextStyle(color: AppColors.primary),
+        fillColor: Colors.white,
         filled: true,
       ),
     );
