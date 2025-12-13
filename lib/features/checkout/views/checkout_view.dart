@@ -86,7 +86,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadiusGeometry.circular(8),
                 ),
-                tileColor: Colors.blue.shade900,
+                tileColor: Color.fromARGB(255, 3, 39, 92),
                 leading: Image.asset('assets/icon/visa.png', width: 50),
                 title: CustomText(text: 'Debit Card', color: Colors.white),
                 subtitle: CustomText(
