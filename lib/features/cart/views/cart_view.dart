@@ -48,18 +48,24 @@ class _CartViewState extends State<CartView> {
           padding: EdgeInsets.only(bottom: 120, top: 10),
           itemCount: itemCount,
           itemBuilder: (context, index) {
-            return CartItem(
-              image: 'assets/detail/tomatow.png',
-              text: 'Tomatow',
-              desc: 'its color is red',
-              number: quantities[index],
-              onAdd: () => onAdd(index),
-              onMin: () => onMin(index),
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 10.0),
+              child: CartItem(
+                image: 'assets/detail/tomatow.png',
+                text: 'Tomatow',
+                desc: 'its color is red',
+                number: quantities[index],
+                onAdd: () => onAdd(index),
+                onMin: () => onMin(index),
+              ),
             );
           },
         ),
       ),
       bottomSheet: Container(
+        height: 90,
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -68,15 +74,12 @@ class _CartViewState extends State<CartView> {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 10,
-              offset: const Offset(0, -3),
+              color: Colors.grey.shade800,
+              blurRadius: 20,
+              offset: const Offset(0, 0),
             ),
           ],
         ),
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        height: 90,
-        width: double.infinity,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
