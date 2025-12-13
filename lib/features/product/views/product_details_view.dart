@@ -42,7 +42,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
               child: Row(
                 children: List.generate(4, (index) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    padding: const EdgeInsets.only(right: 10),
                     child: ToppingCard(
                       imageUrl: 'assets/detail/tomatow.png',
                       title: 'tomatow',
@@ -61,7 +61,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
               child: Row(
                 children: List.generate(4, (index) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    padding: const EdgeInsets.only(right: 10),
                     child: ToppingCard(
                       imageUrl: 'assets/detail/tomatow.png',
                       title: 'tomatow',
@@ -71,7 +71,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                 }),
               ),
             ),
-            Gap(150),
+            Gap(200),
           ],
         ),
       ),
