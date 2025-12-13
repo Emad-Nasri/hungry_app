@@ -26,13 +26,11 @@ class _SplashViewState extends State<SplashView>
       duration: const Duration(milliseconds: 1200),
     );
 
-    /// Fade فقط للّوجو (بدون تصغير)
     _logoFade = Tween<double>(
       begin: 0,
       end: 1,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeIn));
 
-    /// Slide للصورة السفلية
     _imageSlide = Tween<Offset>(
       begin: const Offset(0, 0.5),
       end: Offset.zero,
@@ -62,7 +60,6 @@ class _SplashViewState extends State<SplashView>
         children: [
           const Gap(280),
 
-          /// LOGO (حجم ثابت)
           FadeTransition(
             opacity: _logoFade,
             child: SvgPicture.asset(
@@ -74,7 +71,6 @@ class _SplashViewState extends State<SplashView>
 
           const Spacer(),
 
-          /// Bottom Image Animation
           SlideTransition(
             position: _imageSlide,
             child: Image.asset(

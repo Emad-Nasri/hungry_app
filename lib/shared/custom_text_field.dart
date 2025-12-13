@@ -41,13 +41,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
       validator: (value) {
         if (value == null || value.isEmpty) return 'Please fill ${widget.hint}';
         null;
+        return null;
       },
       obscureText: _obscureText,
       decoration: InputDecoration(
         suffixIcon: widget.isPassword
             ? GestureDetector(
                 onTap: _togglePassword,
-                child: Icon(CupertinoIcons.eye),
+                child: Icon(CupertinoIcons.eye, color: Colors.white),
               )
             : null,
         focusedBorder: OutlineInputBorder(
@@ -57,7 +58,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
           borderSide: BorderSide(color: Colors.white),
         ),
         hintText: widget.hint,
-        fillColor: Colors.white,
+        hintStyle: TextStyle(color: Colors.white),
+        fillColor: Colors.transparent,
         filled: true,
       ),
     );
