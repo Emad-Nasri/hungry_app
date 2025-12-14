@@ -12,9 +12,9 @@ class ProfileView extends StatelessWidget {
         backgroundColor: AppColors.primary,
         leading: GestureDetector(
           onTap: () => Navigator.pop(context),
-          child: Icon(Icons.arrow_back),
+          child: Icon(Icons.arrow_back, color: Colors.white),
         ),
-        actions: [Icon(Icons.settings)],
+        actions: [Icon(Icons.settings, color: Colors.white)],
       ),
       body: Center(child: Text('profile')),
     );
