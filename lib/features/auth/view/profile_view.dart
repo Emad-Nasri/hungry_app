@@ -14,7 +14,12 @@ class ProfileView extends StatelessWidget {
           onTap: () => Navigator.pop(context),
           child: Icon(Icons.arrow_back, color: Colors.white),
         ),
-        actions: [Icon(Icons.settings, color: Colors.white)],
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Icon(Icons.settings, color: Colors.white),
+          ),
+        ],
       ),
       body: Center(child: Text('profile')),
     );
