@@ -5,6 +5,16 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text('profile')));
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        leading: GestureDetector(
+          onTap: () => Navigator.pop(context),
+          child: Icon(Icons.arrow_back),
+        ),
+        actions: [Icon(Icons.settings)],
+      ),
+      body: Center(child: Text('profile')),
+    );
   }
 }
