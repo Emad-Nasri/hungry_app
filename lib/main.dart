@@ -13,7 +13,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Hungry App',
-      theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+      theme: ThemeData(
+        splashColor: Colors.transparent,
+        scaffoldBackgroundColor: Colors.white,
+      ),
       home: SplashView(),
     );
   }
