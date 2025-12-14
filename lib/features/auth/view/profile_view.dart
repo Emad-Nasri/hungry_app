@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hungry_app/core/constants/app_colors.dart';
+import 'package:hungry_app/features/auth/widgets/custom_user_text_field.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -10,11 +11,19 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
+  final TextEditingController _name = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _address = TextEditingController();
+  @override
+  void initState() {
+    _name.text = 'Knuckles';
+    _email.text = 'Knuckles@gmail.com';
+    _address.text = '55 Dubai,UAE';
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController _name = TextEditingController();
-    TextEditingController _email = TextEditingController();
-    TextEditingController _address = TextEditingController();
     return Scaffold(
       backgroundColor: AppColors.primary,
       appBar: AppBar(
@@ -52,24 +61,11 @@ class _ProfileViewState extends State<ProfileView> {
               ),
             ),
             Gap(30),
-            TextField(
-              controller: _name,
-              cursorColor: Colors.white,
-              cursorHeight: 20,
-              style: TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                labelText: 'Name',
-                labelStyle: TextStyle(color: Colors.white),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              ),
-            ),
+            CustomUserTextField(controller: _name, lable: 'Name'),
+            Gap(25),
+            CustomUserTextField(controller: _email, lable: 'Email'),
+            Gap(25),
+            CustomUserTextField(controller: _address, lable: 'Address'),
           ],
         ),
       ),
