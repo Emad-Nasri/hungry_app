@@ -34,15 +34,17 @@ class OrderHistoryView extends StatelessWidget {
                       children: [
                         Image.asset('assets/detail/tomatow.png', width: 100),
 
-                        Column(
-                          children: [
-                            CustomText(
-                              text: 'Tomatow',
-                              weight: FontWeight.bold,
-                            ),
-                            CustomText(text: 'Qty : x3'),
-                            CustomText(text: 'Price : 20\$'),
-                          ],
+                        Flexible(
+                          child: Column(
+                            children: [
+                              CustomText(
+                                text: 'Tomatow',
+                                weight: FontWeight.bold,
+                              ),
+                              CustomText(text: 'Qty : x3'),
+                              CustomText(text: 'Price : 20\$'),
+                            ],
+                          ),
                         ),
                       ],
                     ),
