@@ -21,7 +21,27 @@ class ProfileView extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(child: Text('profile')),
+      body: Column(
+        children: [
+          Center(
+            child: Container(
+              height: 120,
+              width: 120,
+              decoration: BoxDecoration(
+                color: Colors.grey.shade300,
+                image: DecorationImage(
+                  image: NetworkImage(
+                    'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg',
+                    scale: 2,
+                  ),
+                ),
+                border: Border.all(width: 5, color: Colors.white),
+                borderRadius: BorderRadius.circular(15),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
