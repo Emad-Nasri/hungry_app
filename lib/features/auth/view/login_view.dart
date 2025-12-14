@@ -107,7 +107,7 @@ class LoginView extends StatelessWidget {
                           },
                           child: CustomText(
                             text: 'Countinue as a guest ?',
-                            color: Colors.orange,
+                            color: Colors.white,
                             weight: FontWeight.bold,
                             size: 13,
                           ),
