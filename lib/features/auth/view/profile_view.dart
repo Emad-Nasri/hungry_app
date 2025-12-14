@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hungry_app/core/constants/app_colors.dart';
@@ -85,6 +86,52 @@ class _ProfileViewState extends State<ProfileView> {
               trailing: CustomText(text: 'Default', color: Colors.black),
             ),
           ],
+        ),
+      ),
+      bottomSheet: Container(
+        height: 80,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [BoxShadow(color: Colors.grey.shade800, blurRadius: 20)],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              //edit button
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                decoration: BoxDecoration(
+                  color: AppColors.primary,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  children: [
+                    CustomText(text: 'Edit Profile', color: Colors.white),
+                    Gap(5),
+                    Icon(CupertinoIcons.pencil, color: Colors.white),
+                  ],
+                ),
+              ),
+              //logout
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: AppColors.primary),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  children: [
+                    CustomText(text: 'Logout', color: AppColors.primary),
+                    Gap(5),
+                    Icon(Icons.logout, color: AppColors.primary),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
