@@ -43,53 +43,58 @@ class _ProfileViewState extends State<ProfileView> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: Column(
-          children: [
-            Center(
-              child: Container(
-                height: 120,
-                width: 120,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
-                  image: DecorationImage(
-                    image: NetworkImage(
-                      'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg',
-                      scale: 2,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Center(
+                child: Container(
+                  height: 120,
+                  width: 120,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade300,
+                    image: DecorationImage(
+                      image: NetworkImage(
+                        'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg',
+                        scale: 2,
+                      ),
                     ),
+                    border: Border.all(width: 5, color: Colors.white),
+                    borderRadius: BorderRadius.circular(15),
                   ),
-                  border: Border.all(width: 5, color: Colors.white),
-                  borderRadius: BorderRadius.circular(15),
                 ),
               ),
-            ),
-            Gap(30),
-            CustomUserTextField(controller: _name, lable: 'Name'),
-            Gap(25),
-            CustomUserTextField(controller: _email, lable: 'Email'),
-            Gap(25),
-            CustomUserTextField(controller: _address, lable: 'Address'),
-            Gap(20),
-            Divider(),
-            Gap(10),
-            ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadiusGeometry.circular(8),
+              Gap(30),
+              CustomUserTextField(controller: _name, lable: 'Name'),
+              Gap(25),
+              CustomUserTextField(controller: _email, lable: 'Email'),
+              Gap(25),
+              CustomUserTextField(controller: _address, lable: 'Address'),
+              Gap(20),
+              Divider(),
+              Gap(10),
+              ListTile(
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: 0,
+                  horizontal: 16,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadiusGeometry.circular(8),
+                ),
+                tileColor: Color(0xffF3F4F6),
+                leading: Image.asset('assets/icon/profile_visa.png', width: 50),
+                title: CustomText(text: 'Debit Card', color: Colors.black),
+                subtitle: CustomText(
+                  text: '**** ***** 2342',
+                  color: Colors.black,
+                ),
+                trailing: CustomText(text: 'Default', color: Colors.black),
               ),
-              tileColor: Color(0xffF3F4F6),
-              leading: Image.asset('assets/icon/profile_visa.png', width: 50),
-              title: CustomText(text: 'Debit Card', color: Colors.black),
-              subtitle: CustomText(
-                text: '**** ***** 2342',
-                color: Colors.black,
-              ),
-              trailing: CustomText(text: 'Default', color: Colors.black),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       bottomSheet: Container(
-        height: 80,
+        height: 70,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [BoxShadow(color: Colors.grey.shade800, blurRadius: 20)],
