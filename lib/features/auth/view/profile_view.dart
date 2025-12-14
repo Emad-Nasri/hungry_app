@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hungry_app/core/constants/app_colors.dart';
 import 'package:hungry_app/features/auth/widgets/custom_user_text_field.dart';
+import 'package:hungry_app/shared/custom_text.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -69,6 +70,20 @@ class _ProfileViewState extends State<ProfileView> {
             Gap(20),
             Divider(),
             Gap(10),
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadiusGeometry.circular(8),
+              ),
+              tileColor: Color(0xffF3F4F6),
+              leading: Image.asset('assets/icon/profile_visa.png', width: 50),
+              title: CustomText(text: 'Debit Card', color: Colors.black),
+              subtitle: CustomText(
+                text: '**** ***** 2342',
+                color: Colors.black,
+              ),
+              trailing: CustomText(text: 'Default', color: Colors.black),
+            ),
           ],
         ),
       ),
