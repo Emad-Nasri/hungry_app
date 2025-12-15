@@ -12,7 +12,7 @@ class DioClient {
       InterceptorsWrapper(
         onRequest: (options, handler) {
           final token = 'kunukles token';
-          if (token != null && token.isNotEmpty) {
+          if (token.isNotEmpty) {
             options.headers['Authorization'] = 'Bearer $token';
           }
           return handler.next(options);
