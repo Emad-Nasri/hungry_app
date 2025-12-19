@@ -15,8 +15,16 @@ class ApiService {
       ApiExceptions.handleError(e);
     }
   }
-  //POST
 
+  //POST
+  Future<dynamic> post(String endPoint, Map<String, dynamic> body) async {
+    try {
+      final response = await _dioClient.dio.post(endPoint, data: body);
+      return response.data;
+    } on DioError catch (e) {
+      ApiExceptions.handleError(e);
+    }
+  }
   //PUT OR UPDATE
 
   //DELETE
