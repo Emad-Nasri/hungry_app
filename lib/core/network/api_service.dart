@@ -37,4 +37,12 @@ class ApiService {
   }
 
   //DELETE
+  Future<dynamic> delete(String endPoint, Map<String, dynamic> body) async {
+    try {
+      final response = await _dioClient.dio.delete(endPoint, data: body);
+      return response.data;
+    } on DioError catch (e) {
+      ApiExceptions.handleError(e);
+    }
+  }
 }
