@@ -8,14 +8,19 @@ import 'package:hungry_app/root.dart';
 import 'package:hungry_app/shared/custom_text.dart';
 import 'package:hungry_app/shared/custom_text_field.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatefulWidget {
   const LoginView({super.key});
 
   @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey();
+  @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passController = TextEditingController();
-    final GlobalKey<FormState> formKey = GlobalKey();
     return GestureDetector(
       onTap: () => FocusScope.of(
         context,
