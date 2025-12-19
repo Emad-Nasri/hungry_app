@@ -9,7 +9,7 @@ class AuthRepo {
   ApiService apiService = ApiService();
 
   //LOGIN
-  Future<UserModel> login(String email, String password) async {
+  Future<UserModel?> login(String email, String password) async {
     try {
       final response = await apiService.post('/login', {
         'email': email,
