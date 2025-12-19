@@ -9,9 +9,20 @@ class UserModel {
   UserModel({
     required this.name,
     required this.email,
-    required this.image,
-    required this.token,
-    required this.address,
-    required this.visa,
+    this.image,
+    this.token,
+    this.address,
+    this.visa,
   });
+
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      name: json['name'] ?? "",
+      email: json['email'] ?? "",
+      image: json['image'] ?? "",
+      token: json['token'] ?? "",
+      address: json['address'] ?? "",
+      visa: json['Visa'] ?? "",
+    );
+  }
 }
