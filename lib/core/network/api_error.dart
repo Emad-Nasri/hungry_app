@@ -5,6 +5,6 @@ class ApiError {
   ApiError({required this.message, this.statusCode});
   @override
   String toString() {
-    return 'Error is : $message (Status code is $statusCode)';
+    return message;
   }
 }

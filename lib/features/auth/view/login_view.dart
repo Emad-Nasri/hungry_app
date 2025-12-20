@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hungry_app/core/constants/app_colors.dart';
+import 'package:hungry_app/core/network/api_error.dart';
+import 'package:hungry_app/features/auth/data/auth_repo.dart';
 import 'package:hungry_app/features/auth/view/signup_view.dart';
 import 'package:hungry_app/features/auth/widgets/custom_auth_button.dart';
 import 'package:hungry_app/root.dart';
@@ -19,6 +22,34 @@ class _LoginViewState extends State<LoginView> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey();
+  bool isLoading = false;
+  AuthRepo authRepo = AuthRepo();
+  Future<void> login() async {
+    setState(() => isLoading = true);
+    if (formKey.currentState!.validate()) {
+      try {
+        final user = await authRepo.login(
+          emailController.text.trim(),
+          passController.text.trim(),
+        );
+        //trim تعالج اذا المستخدم ادخل سبيس فقط
+        if (user != null) {
+          Navigator.push(context, MaterialPageRoute(builder: (c) => Root()));
+        }
+        setState(() => isLoading = false);
+      } catch (e) {
+        setState(() => isLoading = false);
+        String errorMsg = 'unhandled error in login';
+        if (e is ApiError) {
+          errorMsg = e.message;
+        }
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(errorMsg)));
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -70,15 +101,15 @@ class _LoginViewState extends State<LoginView> {
                           isPassword: true,
                         ),
                         Gap(15),
-                        CustomAuthButton(
-                          color: AppColors.primary,
-                          textColor: Colors.white,
-                          text: 'Login',
-                          onTap: () {
-                            if (formKey.currentState!.validate())
-                              print('success login');
-                          },
-                        ),
+                        //login
+                        isLoading
+                            ? CupertinoActivityIndicator(color: Colors.white)
+                            : CustomAuthButton(
+                                color: AppColors.primary,
+                                textColor: Colors.white,
+                                text: 'Login',
+                                onTap: login,
+                              ),
                         Gap(15),
 
                         //go to sign up

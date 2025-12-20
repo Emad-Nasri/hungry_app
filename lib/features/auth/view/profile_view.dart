@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hungry_app/core/constants/app_colors.dart';
+import 'package:hungry_app/features/auth/view/login_view.dart';
 import 'package:hungry_app/features/auth/widgets/custom_user_text_field.dart';
 import 'package:hungry_app/shared/custom_text.dart';
 
@@ -127,12 +128,18 @@ class _ProfileViewState extends State<ProfileView> {
                   border: Border.all(color: AppColors.primary),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Row(
-                  children: [
-                    CustomText(text: 'Logout', color: AppColors.primary),
-                    Gap(5),
-                    Icon(Icons.logout, color: AppColors.primary),
-                  ],
+                child: GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (c) => LoginView()),
+                  ),
+                  child: Row(
+                    children: [
+                      CustomText(text: 'Logout', color: AppColors.primary),
+                      Gap(5),
+                      Icon(Icons.logout, color: AppColors.primary),
+                    ],
+                  ),
                 ),
               ),
             ],
