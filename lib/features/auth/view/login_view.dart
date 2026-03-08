@@ -25,8 +25,8 @@ class _LoginViewState extends State<LoginView> {
   bool isLoading = false;
   AuthRepo authRepo = AuthRepo();
   Future<void> login() async {
-    setState(() => isLoading = true);
     if (formKey.currentState!.validate()) {
+      setState(() => isLoading = true);
       try {
         final user = await authRepo.login(
           emailController.text.trim(),
@@ -43,9 +43,28 @@ class _LoginViewState extends State<LoginView> {
         if (e is ApiError) {
           errorMsg = e.message;
         }
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(errorMsg)));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            margin: EdgeInsets.only(bottom: 30, right: 20, left: 20),
+            elevation: 10,
+            behavior: SnackBarBehavior.floating,
+            clipBehavior: Clip.none,
+            backgroundColor: Colors.red.shade900,
+            content: Row(
+              children: [
+                Icon(CupertinoIcons.info, color: Colors.white),
+                Gap(14),
+                CustomText(
+                  text: errorMsg,
+                  color: Colors.white,
+                  size: 13,
+                  weight: FontWeight.w600,
+                ),
+              ],
+            ),
+          ),
+        );
       }
     }
   }

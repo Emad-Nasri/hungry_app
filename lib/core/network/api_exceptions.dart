@@ -24,7 +24,7 @@ class ApiExceptions {
         return ApiError(message: 'Server error');
 
       default:
-        return ApiError(message: 'Unexpected error occurred');
+        return ApiError(message: 'Unexpected error occurred.Please try again');
     }
   }
 }
