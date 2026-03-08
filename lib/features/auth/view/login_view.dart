@@ -25,29 +25,28 @@ class _LoginViewState extends State<LoginView> {
   bool isLoading = false;
   AuthRepo authRepo = AuthRepo();
   Future<void> login() async {
-    if (!formKey.currentState!.validate()) return;
-
     setState(() => isLoading = true);
-
-    try {
-      final user = await authRepo.login(
-        emailController.text.trim(),
-        passController.text.trim(),
-      );
-
-      if (user != null) {
-        Navigator.push(context, MaterialPageRoute(builder: (c) => Root()));
+    if (formKey.currentState!.validate()) {
+      try {
+        final user = await authRepo.login(
+          emailController.text.trim(),
+          passController.text.trim(),
+        );
+        //trim تعالج اذا المستخدم ادخل سبيس فقط
+        if (user != null) {
+          Navigator.push(context, MaterialPageRoute(builder: (c) => Root()));
+        }
+        setState(() => isLoading = false);
+      } catch (e) {
+        setState(() => isLoading = false);
+        String errorMsg = 'unhandled error in login';
+        if (e is ApiError) {
+          errorMsg = e.message;
+        }
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(errorMsg)));
       }
-    } on ApiError catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(e.message)));
-    } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Unexpected error')));
-    } finally {
-      setState(() => isLoading = false);
     }
   }
 
