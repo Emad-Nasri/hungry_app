@@ -57,87 +57,96 @@ class _SignupViewState extends State<SignupView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Form(
-        key: formKey,
-        child: Column(
-          children: [
-            Gap(200),
-            SvgPicture.asset('assets/logo/logo.svg', color: AppColors.primary),
-            CustomText(
-              text: 'Welcome to our Food App',
-              color: AppColors.primary,
-            ),
-            Gap(60),
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
+    return PopScope(
+      canPop: false,
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Scaffold(
+          appBar: AppBar(toolbarHeight: 0.0, backgroundColor: Colors.white),
+          body: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                Gap(200),
+                SvgPicture.asset(
+                  'assets/logo/logo.svg',
                   color: AppColors.primary,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+                ),
+                CustomText(
+                  text: 'Welcome to our Food App',
+                  color: AppColors.primary,
+                ),
+                Gap(60),
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                      ),
+                    ),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Column(
+                        children: [
+                          Gap(30),
+                          CustomTextField(
+                            controller: nameController,
+                            hint: 'Name',
+                            isPassword: false,
+                          ),
+                          Gap(15),
+                          CustomTextField(
+                            controller: emailController,
+                            hint: 'Email address',
+                            isPassword: false,
+                          ),
+                          Gap(15),
+                          CustomTextField(
+                            controller: passController,
+                            hint: 'Password',
+                            isPassword: true,
+                          ),
+                          Gap(15),
+
+                          Gap(20),
+                          //signup
+                          isLoading
+                              ? CupertinoActivityIndicator(color: Colors.white)
+                              : CustomAuthButton(
+                                  color: AppColors.primary,
+                                  textColor: Colors.white,
+                                  text: 'Sign Up',
+                                  onTap: signup,
+                                ),
+                          Gap(15),
+
+                          //go to login
+                          CustomAuthButton(
+                            textColor: AppColors.primary,
+                            color: Colors.white,
+                            text: 'Go to login ?',
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (c) {
+                                    return LoginView();
+                                  },
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Column(
-                    children: [
-                      Gap(30),
-                      CustomTextField(
-                        controller: nameController,
-                        hint: 'Name',
-                        isPassword: false,
-                      ),
-                      Gap(15),
-                      CustomTextField(
-                        controller: emailController,
-                        hint: 'Email address',
-                        isPassword: false,
-                      ),
-                      Gap(15),
-                      CustomTextField(
-                        controller: passController,
-                        hint: 'Password',
-                        isPassword: true,
-                      ),
-                      Gap(15),
-
-                      Gap(20),
-                      //signup
-                      isLoading
-                          ? CupertinoActivityIndicator(color: Colors.white)
-                          : CustomAuthButton(
-                              color: AppColors.primary,
-                              textColor: Colors.white,
-                              text: 'Sign Up',
-                              onTap: signup,
-                            ),
-                      Gap(15),
-
-                      //go to login
-                      CustomAuthButton(
-                        textColor: AppColors.primary,
-                        color: Colors.white,
-                        text: 'Go to login ?',
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (c) {
-                                return LoginView();
-                              },
-                            ),
-                          );
-                        },
-                      ),
-                      Gap(200),
-                    ],
-                  ),
-                ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

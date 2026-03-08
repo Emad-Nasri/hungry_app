@@ -51,110 +51,114 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(
-        context,
-      ).unfocus(), //اذا كبست على اس شي غير التيكستفيلد بينزل الكيبورد
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
-        body: Form(
-          key: formKey,
-          child: Column(
-            children: [
-              Gap(200),
-              SvgPicture.asset(
-                'assets/logo/logo.svg',
-                color: AppColors.primary,
-              ),
-              Gap(10),
-              CustomText(
-                text: 'Welcome Back, Discover The Best Fast Food',
-                color: AppColors.primary,
-                weight: FontWeight.w500,
-                size: 13,
-              ),
-              Gap(60),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: AppColors.primary,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
+    return PopScope(
+      canPop: false,
+      child: GestureDetector(
+        onTap: () => FocusScope.of(
+          context,
+        ).unfocus(), //اذا كبست على اس شي غير التيكستفيلد بينزل الكيبورد
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          backgroundColor: Colors.white,
+          body: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                Gap(200),
+                SvgPicture.asset(
+                  'assets/logo/logo.svg',
+                  color: AppColors.primary,
+                ),
+                Gap(10),
+                CustomText(
+                  text: 'Welcome Back, Discover The Best Fast Food',
+                  color: AppColors.primary,
+                  weight: FontWeight.w500,
+                  size: 13,
+                ),
+                Gap(60),
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                      ),
                     ),
-                  ),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Column(
-                      children: [
-                        Gap(30),
-                        CustomTextField(
-                          controller: emailController,
-                          hint: 'Email address',
-                          isPassword: false,
-                        ),
-                        Gap(15),
-                        CustomTextField(
-                          controller: passController,
-                          hint: 'Password',
-                          isPassword: true,
-                        ),
-                        Gap(15),
-                        //login
-                        isLoading
-                            ? CupertinoActivityIndicator(color: Colors.white)
-                            : CustomAuthButton(
-                                color: AppColors.primary,
-                                textColor: Colors.white,
-                                text: 'Login',
-                                onTap: login,
-                              ),
-                        Gap(15),
-
-                        //go to sign up
-                        CustomAuthButton(
-                          textColor: AppColors.primary,
-                          color: Colors.white,
-                          text: 'Create Account ?',
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (c) {
-                                  return SignupView();
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                        //Guest
-                        Gap(10),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (c) {
-                                  return Root();
-                                },
-                              ),
-                            );
-                          },
-                          child: CustomText(
-                            text: 'Countinue as a guest ?',
-                            color: Colors.white,
-                            weight: FontWeight.bold,
-                            size: 13,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Column(
+                        children: [
+                          Gap(30),
+                          CustomTextField(
+                            controller: emailController,
+                            hint: 'Email address',
+                            isPassword: false,
                           ),
-                        ),
-                      ],
+                          Gap(15),
+                          CustomTextField(
+                            controller: passController,
+                            hint: 'Password',
+                            isPassword: true,
+                          ),
+                          Gap(15),
+                          //login
+                          isLoading
+                              ? CupertinoActivityIndicator(color: Colors.white)
+                              : CustomAuthButton(
+                                  color: AppColors.primary,
+                                  textColor: Colors.white,
+                                  text: 'Login',
+                                  onTap: login,
+                                ),
+                          Gap(15),
+
+                          //go to sign up
+                          CustomAuthButton(
+                            textColor: AppColors.primary,
+                            color: Colors.white,
+                            text: 'Create Account ?',
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (c) {
+                                    return SignupView();
+                                  },
+                                ),
+                              );
+                            },
+                          ),
+                          //Guest
+                          Gap(10),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (c) {
+                                    return Root();
+                                  },
+                                ),
+                              );
+                            },
+                            child: CustomText(
+                              text: 'Countinue as a guest ?',
+                              color: Colors.white,
+                              weight: FontWeight.bold,
+                              size: 13,
+                            ),
+                          ),
+                          Gap(320),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
