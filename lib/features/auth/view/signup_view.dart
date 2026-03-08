@@ -65,54 +65,62 @@ class _SignupViewState extends State<SignupView> {
           appBar: AppBar(toolbarHeight: 0.0, backgroundColor: Colors.white),
           body: Form(
             key: formKey,
-            child: Column(
-              children: [
-                Gap(200),
-                SvgPicture.asset(
-                  'assets/logo/logo.svg',
-                  color: AppColors.primary,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
                 ),
-                CustomText(
-                  text: 'Welcome to our Food App',
-                  color: AppColors.primary,
-                ),
-                Gap(60),
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
+                child: Column(
+                  children: [
+                    Gap(150),
+
+                    SvgPicture.asset(
+                      'assets/logo/logo.svg',
                       color: AppColors.primary,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
                     ),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
+
+                    CustomText(
+                      text: 'Welcome to our Food App',
+                      color: AppColors.primary,
+                      weight: FontWeight.w500,
+                    ),
+
+                    Gap(40),
+
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFC6D0D0),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
                       child: Column(
                         children: [
                           Gap(30),
+
                           CustomTextField(
                             controller: nameController,
                             hint: 'Name',
                             isPassword: false,
                           ),
+
                           Gap(15),
+
                           CustomTextField(
                             controller: emailController,
                             hint: 'Email address',
                             isPassword: false,
                           ),
+
                           Gap(15),
+
                           CustomTextField(
                             controller: passController,
                             hint: 'Password',
                             isPassword: true,
                           ),
-                          Gap(15),
 
                           Gap(20),
-                          //signup
+
                           isLoading
                               ? CupertinoActivityIndicator(color: Colors.white)
                               : CustomAuthButton(
@@ -121,30 +129,48 @@ class _SignupViewState extends State<SignupView> {
                                   text: 'Sign Up',
                                   onTap: signup,
                                 ),
+
                           Gap(15),
 
-                          //go to login
-                          CustomAuthButton(
-                            textColor: AppColors.primary,
-                            color: Colors.white,
-                            text: 'Go to login ?',
-                            onTap: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (c) {
-                                    return LoginView();
-                                  },
-                                ),
-                              );
-                            },
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomAuthButton(
+                                width: 150,
+                                textColor: AppColors.primary,
+                                color: Colors.white,
+                                text: 'Login',
+                                border: Border.all(color: AppColors.primary),
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (c) => LoginView(),
+                                    ),
+                                  );
+                                },
+                              ),
+                              CustomAuthButton(
+                                width: 150,
+                                textColor: AppColors.primary,
+                                color: Colors.white,
+                                text: 'Guest',
+                                border: Border.all(color: AppColors.primary),
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (c) => Root()),
+                                  );
+                                },
+                              ),
+                            ],
                           ),
                         ],
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),

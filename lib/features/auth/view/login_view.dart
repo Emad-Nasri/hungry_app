@@ -58,53 +58,60 @@ class _LoginViewState extends State<LoginView> {
           context,
         ).unfocus(), //اذا كبست على اس شي غير التيكستفيلد بينزل الكيبورد
         child: Scaffold(
-          resizeToAvoidBottomInset: false,
           backgroundColor: Colors.white,
           body: Form(
             key: formKey,
-            child: Column(
-              children: [
-                Gap(200),
-                SvgPicture.asset(
-                  'assets/logo/logo.svg',
-                  color: AppColors.primary,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
                 ),
-                Gap(10),
-                CustomText(
-                  text: 'Welcome Back, Discover The Best Fast Food',
-                  color: AppColors.primary,
-                  weight: FontWeight.w500,
-                  size: 13,
-                ),
-                Gap(60),
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
+                child: Column(
+                  children: [
+                    Gap(180),
+
+                    SvgPicture.asset(
+                      'assets/logo/logo.svg',
                       color: AppColors.primary,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
                     ),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
+
+                    Gap(10),
+
+                    CustomText(
+                      text: 'Welcome Back, Discover The Best Fast Food',
+                      color: AppColors.primary,
+                      weight: FontWeight.w500,
+                      size: 13,
+                    ),
+
+                    Gap(30),
+
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFC6D0D0),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
                       child: Column(
                         children: [
                           Gap(30),
+
                           CustomTextField(
                             controller: emailController,
                             hint: 'Email address',
                             isPassword: false,
                           ),
+
                           Gap(15),
+
                           CustomTextField(
                             controller: passController,
                             hint: 'Password',
                             isPassword: true,
                           ),
+
                           Gap(15),
-                          //login
+
                           isLoading
                               ? CupertinoActivityIndicator(color: Colors.white)
                               : CustomAuthButton(
@@ -113,51 +120,48 @@ class _LoginViewState extends State<LoginView> {
                                   text: 'Login',
                                   onTap: login,
                                 ),
+
                           Gap(15),
 
-                          //go to sign up
-                          CustomAuthButton(
-                            textColor: AppColors.primary,
-                            color: Colors.white,
-                            text: 'Create Account ?',
-                            onTap: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (c) {
-                                    return SignupView();
-                                  },
-                                ),
-                              );
-                            },
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomAuthButton(
+                                width: 150,
+                                textColor: AppColors.primary,
+                                color: Colors.white,
+                                text: 'Signup',
+                                border: Border.all(color: AppColors.primary),
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (c) => SignupView(),
+                                    ),
+                                  );
+                                },
+                              ),
+                              CustomAuthButton(
+                                width: 150,
+                                textColor: AppColors.primary,
+                                color: Colors.white,
+                                text: 'Guest',
+                                border: Border.all(color: AppColors.primary),
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (c) => Root()),
+                                  );
+                                },
+                              ),
+                            ],
                           ),
-                          //Guest
-                          Gap(10),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (c) {
-                                    return Root();
-                                  },
-                                ),
-                              );
-                            },
-                            child: CustomText(
-                              text: 'Countinue as a guest ?',
-                              color: Colors.white,
-                              weight: FontWeight.bold,
-                              size: 13,
-                            ),
-                          ),
-                          Gap(320),
                         ],
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),

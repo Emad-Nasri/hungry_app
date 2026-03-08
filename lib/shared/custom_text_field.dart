@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hungry_app/core/constants/app_colors.dart';
 
+// ignore: must_be_immutable
 class CustomTextField extends StatefulWidget {
   CustomTextField({
     super.key,
@@ -52,7 +53,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
               )
             : null,
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
+          borderSide: BorderSide(color: Colors.black),
+          borderRadius: BorderRadius.circular(10),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.primary),
