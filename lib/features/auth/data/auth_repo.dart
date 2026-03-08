@@ -54,8 +54,46 @@ class AuthRepo {
       throw ApiError(message: e.toString());
     }
   }
-  // REGISTER
 
+  // SIGNUP
+  Future<UserModel?> signup(String name, String email, String password) async {
+    try {
+      final response = await apiService.post('/register', {
+        'name': name,
+        'email': email,
+        'password': password,
+      });
+
+      if (response is ApiError) {
+        throw response;
+      }
+
+      if (response is Map<String, dynamic>) {
+        final msg = response['message'];
+        final code = response['code'];
+        final coder = int.tryParse(code);
+        final data = response['data'];
+
+        if (coder != 200 && coder != 201) {
+          throw ApiError(message: msg ?? 'Unknown error');
+        }
+
+        final user = UserModel.fromJson(data);
+
+        if (user.token != null) {
+          await PrefHelper.saveToken(user.token!);
+        }
+
+        return user;
+      } else {
+        throw ApiError(message: 'UnExpected Error From Server');
+      }
+    } on DioError catch (e) {
+      throw ApiExceptions.handleError(e);
+    } catch (e) {
+      throw ApiError(message: e.toString());
+    }
+  }
   // GET PROFILE
 
   // UPDATE PROFILE
