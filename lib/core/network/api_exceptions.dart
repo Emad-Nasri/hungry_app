@@ -2,25 +2,29 @@ import 'package:dio/dio.dart';
 import 'package:hungry_app/core/network/api_error.dart';
 
 class ApiExceptions {
-  static ApiError handleError(DioError error) {
+  static ApiError handleError(DioException error) {
     final statusCode = error.response?.statusCode;
     final data = error.response?.data;
-    if (data is Map<String, dynamic> && data['message'] != null) {
-      return ApiError(message: data['message'], statusCode: statusCode);
+
+    // إذا السيرفر رجع رسالة خطأ
+    if (data != null && data is Map<String, dynamic>) {
+      if (data['message'] != null) {
+        return ApiError(
+          message: data['message'].toString(),
+          statusCode: statusCode,
+        );
+      }
     }
+
     switch (error.type) {
-      case DioErrorType.connectionTimeout:
-        return ApiError(
-          message: 'Connection timeout. Please check your internet connection',
-        );
-      case DioErrorType.sendTimeout:
-        return ApiError(message: 'Request timeout. Please try again');
-      case DioErrorType.receiveTimeout:
-        return ApiError(message: 'Response timeout. Please try again');
+      case DioExceptionType.connectionTimeout:
+        return ApiError(message: 'Connection timeout');
+
+      case DioExceptionType.badResponse:
+        return ApiError(message: 'Server error');
+
       default:
-        return ApiError(
-          message: 'An unexpected error occurred. Please try again',
-        );
+        return ApiError(message: 'Unexpected error occurred');
     }
   }
 }

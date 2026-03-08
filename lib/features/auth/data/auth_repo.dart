@@ -6,44 +6,59 @@ import 'package:hungry_app/core/utils/pref_helper.dart';
 import 'package:hungry_app/features/auth/data/user_model.dart';
 
 class AuthRepo {
-  ApiService apiService = ApiService();
+  final ApiService apiService = ApiService();
 
-  //LOGIN
+  // LOGIN
   Future<UserModel?> login(String email, String password) async {
     try {
       final response = await apiService.post('/login', {
         'email': email,
         'password': password,
       });
-      if (response is ApiError) {
-        throw response;
+
+      if (response == null) {
+        throw ApiError(message: "Server returned empty response");
       }
+
       if (response is Map<String, dynamic>) {
         final msg = response['message'];
         final code = response['code'];
         final data = response['data'];
+
+        // إذا السيرفر رجع خطأ
         if (code != 200 || data == null) {
-          throw ApiError(message: msg);
+          throw ApiError(message: msg ?? "Login failed");
         }
-        final user = UserModel.fromJson(response['data']);
+
+        final user = UserModel.fromJson(data);
+
         if (user.token != null) {
           await PrefHelper.saveToken(user.token!);
         }
+
         return user;
       } else {
-        throw ApiError(message: 'UnExepected Error Form Server');
+        throw ApiError(message: 'Unexpected response format from server');
       }
-    } on DioError catch (e) {
+    }
+    // أخطاء Dio
+    on DioException catch (e) {
       throw ApiExceptions.handleError(e);
-    } catch (e) {
+    }
+    // أخطاء API
+    on ApiError {
+      rethrow;
+    }
+    // أي خطأ آخر
+    catch (e) {
       throw ApiError(message: e.toString());
     }
   }
-  //REGISTER
+  // REGISTER
 
-  //GET PROFILE DATA
+  // GET PROFILE
 
-  //UPDATE PROFILE DATA
+  // UPDATE PROFILE
 
-  //LOGOUT
+  // LOGOUT
 }
