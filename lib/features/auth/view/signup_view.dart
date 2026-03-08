@@ -27,36 +27,36 @@ class _SignupViewState extends State<SignupView> {
   bool isLoading = false;
   AuthRepo authRepo = AuthRepo();
 
-  @override
-  Widget build(BuildContext context) {
-    Future<void> signup() async {
-      if (!formKey.currentState!.validate()) return;
+  Future<void> signup() async {
+    if (!formKey.currentState!.validate()) return;
 
-      setState(() => isLoading = true);
+    setState(() => isLoading = true);
 
-      try {
-        final user = await authRepo.signup(
-          nameController.text.trim(),
-          emailController.text.trim(),
-          passController.text.trim(),
-        );
+    try {
+      final user = await authRepo.signup(
+        nameController.text.trim(),
+        emailController.text.trim(),
+        passController.text.trim(),
+      );
 
-        if (user != null) {
-          Navigator.push(context, MaterialPageRoute(builder: (c) => Root()));
-        }
-      } catch (e) {
-        String errMsg = 'Error in Register';
+      if (user != null) {
+        Navigator.push(context, MaterialPageRoute(builder: (c) => Root()));
+      }
+    } catch (e) {
+      String errMsg = 'Error in Register';
 
-        if (e is ApiError) {
-          errMsg = e.message;
-        }
-
-        ScaffoldMessenger.of(context).showSnackBar(customSnack(errMsg));
+      if (e is ApiError) {
+        errMsg = e.message;
       }
 
-      setState(() => isLoading = false);
+      ScaffoldMessenger.of(context).showSnackBar(customSnack(errMsg));
     }
 
+    setState(() => isLoading = false);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Form(
         key: formKey,
