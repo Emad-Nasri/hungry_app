@@ -76,6 +76,7 @@ class _LoginViewState extends State<LoginView> {
         context,
       ).unfocus(), //اذا كبست على اس شي غير التيكستفيلد بينزل الكيبورد
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         body: Center(
           child: Form(
