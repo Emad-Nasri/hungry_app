@@ -22,11 +22,11 @@ class CustomUserTextField extends StatelessWidget {
         labelStyle: TextStyle(color: color ?? Colors.white),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: color ?? Colors.white),
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(5),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: color ?? Colors.white),
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(10),
         ),
       ),
     );
