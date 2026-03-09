@@ -70,23 +70,28 @@ class _ProfileViewState extends State<ProfileView> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Center(
-                child: Container(
-                  height: 120,
-                  width: 120,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg',
-                        scale: 2,
+              //image
+              userModel == null
+                  ? CupertinoActivityIndicator()
+                  : Center(
+                      child: Container(
+                        height: 120,
+                        width: 120,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(
+                              //استخدمناها لانو الديكوريشن ما بيدعم الايمج دوت نيتورك
+                              userModel!.image!,
+                            ),
+                          ),
+                          border: Border.all(
+                            width: 3,
+                            color: AppColors.primary,
+                          ),
+                          shape: BoxShape.circle,
+                        ),
                       ),
                     ),
-                    border: Border.all(width: 5, color: AppColors.primary),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
-              ),
               Gap(30),
               CustomUserTextField(
                 color: AppColors.primary,
