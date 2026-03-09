@@ -50,6 +50,13 @@ class _LoginViewState extends State<LoginView> {
   }
 
   @override
+  void initState() {
+    emailController.text = 'emad@gmail.com';
+    passController.text = '123456789';
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,

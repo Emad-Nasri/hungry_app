@@ -41,10 +41,12 @@ class _ProfileViewState extends State<ProfileView> {
 
   @override
   void initState() {
-    getProfileData();
-    _name.text = 'Knuckles';
-    _email.text = 'Knuckles@gmail.com';
-    _address.text = '55 Dubai,UAE';
+    getProfileData().then((v) {
+      _name.text = userModel?.name.toString() ?? 'Person Name';
+      _email.text = userModel?.email.toString() ?? 'PersonEmail@gmail.com';
+      _address.text = userModel?.address.toString() ?? 'Person Address';
+    });
+
     super.initState();
   }
 
