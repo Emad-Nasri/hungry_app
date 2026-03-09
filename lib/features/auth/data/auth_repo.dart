@@ -94,8 +94,18 @@ class AuthRepo {
       throw ApiError(message: e.toString());
     }
   }
-  // GET PROFILE
 
+  // GET PROFILE
+  Future<UserModel?> getProfileData() async {
+    try {
+      final response = await apiService.get('/profile');
+      return UserModel.fromJson(response['data']);
+    } on DioError catch (e) {
+      throw ApiExceptions.handleError(e);
+    } catch (e) {
+      throw ApiError(message: e.toString());
+    }
+  }
   // UPDATE PROFILE
 
   // LOGOUT
