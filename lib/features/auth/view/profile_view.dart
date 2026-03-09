@@ -28,17 +28,17 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primary,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: AppColors.primary,
+        backgroundColor: Colors.white,
         leading: GestureDetector(
           onTap: () => Navigator.pop(context),
-          child: Icon(Icons.arrow_back, color: Colors.white),
+          child: Icon(Icons.arrow_back, color: AppColors.primary),
         ),
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Icon(Icons.settings, color: Colors.white),
+            child: Icon(Icons.settings, color: AppColors.primary),
           ),
         ],
       ),
@@ -59,17 +59,29 @@ class _ProfileViewState extends State<ProfileView> {
                         scale: 2,
                       ),
                     ),
-                    border: Border.all(width: 5, color: Colors.white),
+                    border: Border.all(width: 5, color: AppColors.primary),
                     borderRadius: BorderRadius.circular(15),
                   ),
                 ),
               ),
               Gap(30),
-              CustomUserTextField(controller: _name, lable: 'Name'),
+              CustomUserTextField(
+                color: AppColors.primary,
+                controller: _name,
+                lable: 'Name',
+              ),
               Gap(25),
-              CustomUserTextField(controller: _email, lable: 'Email'),
+              CustomUserTextField(
+                color: AppColors.primary,
+                controller: _email,
+                lable: 'Email',
+              ),
               Gap(25),
-              CustomUserTextField(controller: _address, lable: 'Address'),
+              CustomUserTextField(
+                color: AppColors.primary,
+                controller: _address,
+                lable: 'Address',
+              ),
               Gap(20),
               Divider(),
               Gap(10),
@@ -81,7 +93,7 @@ class _ProfileViewState extends State<ProfileView> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadiusGeometry.circular(8),
                 ),
-                tileColor: Color(0xffF3F4F6),
+                tileColor: Color.fromARGB(255, 241, 243, 247),
                 leading: Image.asset('assets/icon/profile_visa.png', width: 50),
                 title: CustomText(text: 'Debit Card', color: Colors.black),
                 subtitle: CustomText(

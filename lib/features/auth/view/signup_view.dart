@@ -90,7 +90,7 @@ class _SignupViewState extends State<SignupView> {
                     Container(
                       padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        color: Color(0xFFC6D0D0),
+                        color: AppColors.secondary,
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: Column(
