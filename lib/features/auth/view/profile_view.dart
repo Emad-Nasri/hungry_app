@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hungry_app/core/constants/app_colors.dart';
+import 'package:hungry_app/core/network/api_error.dart';
+import 'package:hungry_app/features/auth/data/auth_repo.dart';
+import 'package:hungry_app/features/auth/data/user_model.dart';
 import 'package:hungry_app/features/auth/view/login_view.dart';
 import 'package:hungry_app/features/auth/widgets/custom_user_text_field.dart';
 import 'package:hungry_app/shared/custom_text.dart';
@@ -17,8 +20,28 @@ class _ProfileViewState extends State<ProfileView> {
   final TextEditingController _name = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _address = TextEditingController();
+  UserModel? userModel;
+  AuthRepo authRepo = AuthRepo();
+  Future<void> getProfileData() async {
+    try {
+      final user = await authRepo.getProfileData();
+      setState(() {
+        userModel = user;
+      });
+    } catch (e) {
+      String errMsg = 'Error in profile';
+      if (e is ApiError) {
+        errMsg = e.message;
+      }
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(errMsg)));
+    }
+  }
+
   @override
   void initState() {
+    getProfileData();
     _name.text = 'Knuckles';
     _email.text = 'Knuckles@gmail.com';
     _address.text = '55 Dubai,UAE';
