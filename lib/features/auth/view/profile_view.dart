@@ -30,6 +30,7 @@ class _ProfileViewState extends State<ProfileView> {
   UserModel? userModel;
   String? profileImage;
   String? selectedImage;
+  bool isLoading = false;
   AuthRepo authRepo = AuthRepo();
 
   //get profile data
@@ -42,6 +43,36 @@ class _ProfileViewState extends State<ProfileView> {
       });
     } catch (e) {
       String errMsg = 'Error in profile';
+      if (e is ApiError) {
+        errMsg = e.message;
+      }
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(errMsg)));
+    }
+  }
+
+  //update profile data
+  Future<void> updateProfileData() async {
+    try {
+      setState(() => isLoading = true);
+      final user = await authRepo.updateProfileData(
+        name: _name.text.trim(),
+        email: _email.text.trim(),
+        address: _address.text.trim(),
+        imagePath: selectedImage,
+        visa: _visa.text.trim(),
+      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Profile Updated Successfully')));
+      setState(() => isLoading = false);
+
+      setState(() => userModel = user);
+      await getProfileData();
+    } catch (e) {
+      setState(() => isLoading = false);
+      String errMsg = 'Failed to update profile';
       if (e is ApiError) {
         errMsg = e.message;
       }
@@ -120,6 +151,7 @@ class _ProfileViewState extends State<ProfileView> {
                       child: Container(
                         height: 120,
                         width: 120,
+                        clipBehavior: Clip.antiAlias,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
@@ -131,6 +163,20 @@ class _ProfileViewState extends State<ProfileView> {
                             fit: BoxFit.cover,
                           ),
                         ),
+                        child: selectedImage != null
+                            ? Image.file(
+                                File(selectedImage!),
+                                fit: BoxFit.cover,
+                              )
+                            : (userModel?.image != null &&
+                                  userModel!.image!.isNotEmpty)
+                            ? Image.network(
+                                userModel!.image!,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, err, builder) =>
+                                    Icon(Icons.person),
+                              )
+                            : Icon(Icons.person),
                       ),
                     ),
 
@@ -231,40 +277,68 @@ class _ProfileViewState extends State<ProfileView> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   //edit button
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                    decoration: BoxDecoration(
-                      color: AppColors.primary,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Row(
-                      children: [
-                        CustomText(text: 'Edit Profile', color: Colors.white),
-                        Gap(5),
-                        Icon(CupertinoIcons.pencil, color: Colors.white),
-                      ],
-                    ),
-                  ),
+                  isLoading
+                      ? CupertinoActivityIndicator()
+                      : Expanded(
+                          child: GestureDetector(
+                            onTap: updateProfileData,
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 30,
+                                vertical: 15,
+                              ),
+                              margin: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: AppColors.primary,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Row(
+                                children: [
+                                  CustomText(
+                                    text: 'Edit Profile',
+                                    color: Colors.white,
+                                    weight: FontWeight.w600,
+                                  ),
+                                  Gap(5),
+                                  Icon(
+                                    CupertinoIcons.pencil,
+                                    color: Colors.white,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
 
                   //logout
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: AppColors.primary),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: GestureDetector(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (c) => LoginView()),
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 30,
+                        vertical: 15,
                       ),
-                      child: Row(
-                        children: [
-                          CustomText(text: 'Logout', color: AppColors.primary),
-                          Gap(5),
-                          Icon(Icons.logout, color: AppColors.primary),
-                        ],
+                      margin: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: AppColors.primary),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (c) => LoginView()),
+                        ),
+                        child: Row(
+                          children: [
+                            CustomText(
+                              text: 'Logout',
+                              color: AppColors.primary,
+                              weight: FontWeight.w600,
+                            ),
+                            Gap(5),
+                            Icon(Icons.logout, color: AppColors.primary),
+                          ],
+                        ),
                       ),
                     ),
                   ),

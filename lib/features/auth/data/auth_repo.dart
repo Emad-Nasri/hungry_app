@@ -136,18 +136,19 @@ class AuthRepo {
       if (response is Map<String, dynamic>) {
         final msg = response['message'];
         final code = response['code'];
+        final data = response['data'];
         final coder = int.tryParse(code);
 
         if (coder != 200 && coder != 201) {
           throw ApiError(message: msg ?? 'Unknown error');
         }
+        return UserModel.fromJson(data);
       }
     } on DioError catch (e) {
       throw ApiExceptions.handleError(e);
     } catch (e) {
       throw ApiError(message: e.toString());
     }
-    return null;
   }
 
   // LOGOUT
