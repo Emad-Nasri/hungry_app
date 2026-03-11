@@ -183,9 +183,10 @@ class _ProfileViewState extends State<ProfileView> {
                     Gap(10),
                     CustomButton(
                       onTap: pickImage,
-                      width: 138,
+                      width: 162,
                       height: 50,
-                      radius: 50,
+                      radius: 5,
+                      icon: CupertinoIcons.photo_on_rectangle,
                       text: 'Upload image',
                     ),
 
