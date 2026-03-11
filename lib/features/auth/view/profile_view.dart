@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -7,7 +9,9 @@ import 'package:hungry_app/features/auth/data/auth_repo.dart';
 import 'package:hungry_app/features/auth/data/user_model.dart';
 import 'package:hungry_app/features/auth/view/login_view.dart';
 import 'package:hungry_app/features/auth/widgets/custom_user_text_field.dart';
+import 'package:hungry_app/shared/custom_button.dart';
 import 'package:hungry_app/shared/custom_text.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class ProfileView extends StatefulWidget {
@@ -25,9 +29,10 @@ class _ProfileViewState extends State<ProfileView> {
 
   UserModel? userModel;
   String? profileImage;
-
+  String? selectedImage;
   AuthRepo authRepo = AuthRepo();
 
+  //get profile data
   Future<void> getProfileData() async {
     try {
       final user = await authRepo.getProfileData();
@@ -43,6 +48,18 @@ class _ProfileViewState extends State<ProfileView> {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text(errMsg)));
+    }
+  }
+
+  //pick image from gallery
+  Future<void> pickImage() async {
+    final pickedImage = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedImage != null) {
+      setState(() {
+        selectedImage = pickedImage.path;
+      });
     }
   }
 
@@ -110,21 +127,22 @@ class _ProfileViewState extends State<ProfileView> {
                             color: AppColors.primary,
                           ),
                           image: DecorationImage(
-                            image: NetworkImage(
-                              profileImage ??
-                                  'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-                            ),
+                            image: FileImage(File(selectedImage ?? '')),
                             fit: BoxFit.cover,
-                            onError: (exception, stackTrace) {
-                              setState(() {
-                                profileImage =
-                                    'https://cdn-icons-png.flaticon.com/512/149/149071.png';
-                              });
-                            },
                           ),
                         ),
                       ),
                     ),
+
+                    Gap(10),
+                    CustomButton(
+                      onTap: pickImage,
+                      width: 138,
+                      height: 50,
+                      radius: 50,
+                      text: 'Upload image',
+                    ),
+
                     Gap(30),
 
                     CustomUserTextField(
@@ -133,8 +151,8 @@ class _ProfileViewState extends State<ProfileView> {
                       lable: 'Name',
                     ),
 
-                    Gap(25),
-
+                    Gap(30),
+                    //Form
                     CustomUserTextField(
                       color: AppColors.primary,
                       controller: _email,
