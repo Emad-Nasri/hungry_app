@@ -16,7 +16,7 @@ class ApiService {
   }
 
   //POST
-  Future<dynamic> post(String endPoint, Map<String, dynamic> body) async {
+  Future<dynamic> post(String endPoint, dynamic body) async {
     try {
       final response = await _dioClient.dio.post(endPoint, data: body);
       return response.data;
@@ -26,7 +26,7 @@ class ApiService {
   }
 
   //PUT
-  Future<dynamic> put(String endPoint, Map<String, dynamic> body) async {
+  Future<dynamic> put(String endPoint, dynamic body) async {
     try {
       final response = await _dioClient.dio.put(endPoint, data: body);
       return response.data;
@@ -36,7 +36,7 @@ class ApiService {
   }
 
   //DELETE
-  Future<dynamic> delete(String endPoint, Map<String, dynamic> body) async {
+  Future<dynamic> delete(String endPoint, dynamic body) async {
     try {
       final response = await _dioClient.dio.delete(endPoint, data: body);
       return response.data;
