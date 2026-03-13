@@ -152,4 +152,11 @@ class AuthRepo {
   }
 
   // LOGOUT
+  Future<void> logout() async {
+    final response = await apiService.post('/logout', {});
+    if (response['data'] != null) {
+      throw ApiError(message: 'a;ksdhflakshdf');
+    }
+    await PrefHelper.clearToken();
+  }
 }
