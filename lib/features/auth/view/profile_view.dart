@@ -31,6 +31,7 @@ class _ProfileViewState extends State<ProfileView> {
   String? profileImage;
   String? selectedImage;
   bool isLoading = false;
+  bool isLoadingLogout = false;
   AuthRepo authRepo = AuthRepo();
 
   //get profile data
@@ -80,6 +81,18 @@ class _ProfileViewState extends State<ProfileView> {
         context,
       ).showSnackBar(SnackBar(content: Text(errMsg)));
     }
+  }
+
+  //logout
+  Future<void> logout() async {
+    setState(() => isLoadingLogout = true);
+    await authRepo.logout();
+    print('Token cleared from storage');
+    setState(() => isLoadingLogout = false);
+    await Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (c) => LoginView()),
+    );
   }
 
   //pick image from gallery
@@ -155,31 +168,32 @@ class _ProfileViewState extends State<ProfileView> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
-                            width: 3,
+                            width: 5,
                             color: AppColors.primary,
                           ),
-                          image: DecorationImage(
-                            image: FileImage(File(selectedImage ?? '')),
-                            fit: BoxFit.cover,
-                          ),
                         ),
-                        child: selectedImage != null
-                            ? Image.file(
-                                File(selectedImage!),
-                                fit: BoxFit.cover,
-                              )
-                            : (userModel?.image != null &&
-                                  userModel!.image!.isNotEmpty)
-                            ? Image.network(
-                                userModel!.image!,
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, err, builder) =>
-                                    Icon(Icons.person),
-                              )
-                            : Icon(Icons.person),
+                        child: ClipOval(
+                          child: selectedImage != null
+                              ? Image.file(
+                                  File(selectedImage!),
+                                  fit: BoxFit.cover,
+                                  width: 120,
+                                  height: 120,
+                                )
+                              : (userModel?.image != null &&
+                                    userModel!.image!.isNotEmpty)
+                              ? Image.network(
+                                  userModel!.image!,
+                                  fit: BoxFit.cover,
+                                  width: 120,
+                                  height: 120,
+                                  errorBuilder: (context, err, builder) =>
+                                      const Icon(Icons.person, size: 60),
+                                )
+                              : const Icon(Icons.person, size: 60),
+                        ),
                       ),
                     ),
-
                     Gap(10),
                     CustomButton(
                       onTap: pickImage,
@@ -279,7 +293,7 @@ class _ProfileViewState extends State<ProfileView> {
                 children: [
                   //edit button
                   isLoading
-                      ? CupertinoActivityIndicator()
+                      ? Expanded(child: CupertinoActivityIndicator())
                       : Expanded(
                           child: GestureDetector(
                             onTap: updateProfileData,
@@ -312,37 +326,36 @@ class _ProfileViewState extends State<ProfileView> {
                         ),
 
                   //logout
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 30,
-                        vertical: 15,
-                      ),
-                      margin: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: AppColors.primary),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: GestureDetector(
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (c) => LoginView()),
-                        ),
-                        child: Row(
-                          children: [
-                            CustomText(
-                              text: 'Logout',
-                              color: AppColors.primary,
-                              weight: FontWeight.w600,
+                  isLoadingLogout
+                      ? Expanded(child: CupertinoActivityIndicator())
+                      : Expanded(
+                          child: GestureDetector(
+                            onTap: logout,
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 30,
+                                vertical: 15,
+                              ),
+                              margin: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(color: AppColors.primary),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Row(
+                                children: [
+                                  CustomText(
+                                    text: 'Logout',
+                                    color: AppColors.primary,
+                                    weight: FontWeight.w600,
+                                  ),
+                                  Gap(5),
+                                  Icon(Icons.logout, color: AppColors.primary),
+                                ],
+                              ),
                             ),
-                            Gap(5),
-                            Icon(Icons.logout, color: AppColors.primary),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
